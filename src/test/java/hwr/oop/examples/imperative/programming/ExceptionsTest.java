@@ -93,13 +93,25 @@ class ExceptionsTest {
     @Test
     void exceptionExample_ThrowsCheckedException_CanBeCaught() {
         ExceptionsExample example = new ExceptionsExample();
-        fail("Test not yet implemented");
+        try {
+            example.throwCheckedException();
+            fail("Fail");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //fail("Test not yet implemented");
     }
 
     @Test
     void exceptionExample_ThrowsUncheckedException_CanBeCaught() {
         ExceptionsExample example = new ExceptionsExample();
-        fail("Test not yet implemented");
+        try {
+            example.throwUncheckedException();
+            fail("Fail");
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        //fail("Test not yet implemented");
     }
 
 }

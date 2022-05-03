@@ -4,50 +4,56 @@ public class Cell {
 
     boolean alive;
     Position position;
-    Cell[] neighbours = new Cell[8];
+    Field field;
 
-    public Cell(int x, int y) {
-        this.position = new Position(x,y);
+    public Cell(Position position, Field field) {
+        this.position = position;
+        this.field = field;
     }
 
     Position getPosition() {
         return position;
     }
 
-    Cell[] getNeighbours(){
-        for (int i = 0; i < neighbours.length ; i++) {
-            for (int x = position.x - 1; x <= position.y + 1; x++) {
-                for (int y = position.y - 1; y <= position.y + 1; y++) {
-                    if (x != position.x && y != position.y && !outOfGrid(x, y)) {
-                        neighbours[i] = new Cell(x, y);
-                    }
-                }
-            }
-        }
+    public Cell[] getNeighbours() {
+        Position[] pos = position.getNeighbourPositions();
+        Cell[] neighbours = new Cell[pos.length];
+        for (int i = 0; i < pos.length; i++)
+            neighbours[i] = field.getCellAt(pos[i]);
         return neighbours;
     }
 
-    boolean outOfGrid(int x, int y){
-        return (x < 0 || x > 9) || (y < 0 || y > 9);
-    }
-
-    boolean isAlive(){
+    boolean isAlive() {
         return alive;
     }
 
-    boolean isDead(){
+    boolean isDead() {
         return alive;
     }
 
-    boolean isAliveNextGeneration(){
-        return neighbours.length >= 2 && neighbours.length <= 3;
+    boolean isAliveNextGeneration() {
+        Cell[] neighbours = getNeighbours();
+        int activeCells = 0;
+        for (Cell neighbour : neighbours) {
+            if (neighbour.isAlive()) {
+                activeCells++;
+            }
+        }
+        System.out.println(activeCells);
+        if (alive && (activeCells == 2 || activeCells == 3)) {
+            System.out.println("yes");
+            return true;
+        } else if (!alive && activeCells == 3) {
+            return true;
+        }
+        return false;
     }
 
-    void markAlive(){
+    void markAlive() {
         alive = true;
     }
 
-    void markDead(){
+    void markDead() {
         alive = false;
     }
 }

@@ -21,21 +21,7 @@ public class Position {
         }
         return false;
     }
-    /*
-    Position[] getNeighbourPositions(){
-        Position[] neighbours = new Position[8];
-        for (int i = 0; i < neighbours.length ; i++) {
-            for (int x = this.x - 1; x <= this.x + 1; x++) {
-                for (int y = this.y - 1; y <= this.y + 1; y++) {
-                    if (isNextTo(this) && !outOfGrid(x,y)) {
-                        neighbours[i] = new Position(x,y);
-                    }
-                }
-            }
-        }
-        return cropNeighbours(neighbours);
-    }
-    */
+
     Position[] getNeighbourPositions(){
         int count = 0;
         Position[] neighbours = new Position[100];
@@ -44,16 +30,9 @@ public class Position {
                     if (isNextTo(this) && !outOfGrid(x,y) && !this.equals(new Position(x,y))) {
                         neighbours[count] = new Position(x,y);
                         count++;
-                        //System.out.println("x: " +x + " y: " +y);
                     }
                 }
             }
-            /*
-        for(Position c : cropNeighbours(neighbours)){
-            System.out.println(c);
-        }
-        */
-        //System.out.println(neighbours);
         return cropNeighbours(neighbours);
     }
 

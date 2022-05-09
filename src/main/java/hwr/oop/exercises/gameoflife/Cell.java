@@ -28,7 +28,7 @@ public class Cell {
     }
 
     boolean isDead() {
-        return alive;
+        return !alive;
     }
 
     boolean isAliveNextGeneration() {
@@ -39,11 +39,24 @@ public class Cell {
                 activeCells++;
             }
         }
-        System.out.println(activeCells);
-        if (alive && (activeCells == 2 || activeCells == 3)) {
+
+        //System.out.println(activeCells);
+        if (isAlive() && (activeCells == 2 || activeCells == 3)) {
+            System.out.println(activeCells);
+
             System.out.println("yes");
             return true;
-        } else if (!alive && activeCells == 3) {
+        }
+        if (isAlive() && (activeCells<2 || activeCells>3)) {
+            System.out.println(activeCells);
+
+            System.out.println("yes2");
+            return false;
+        }
+        if (isDead() && (activeCells == 3)) {
+            System.out.println(activeCells);
+
+            System.out.println("yes3");
             return true;
         }
         return false;
@@ -56,4 +69,5 @@ public class Cell {
     void markDead() {
         alive = false;
     }
+
 }

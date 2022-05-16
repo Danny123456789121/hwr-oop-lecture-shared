@@ -1,5 +1,9 @@
 package hwr.oop.examples.polymorphism.subtyp;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class Rectangle implements Quadrangle {
     private final double height;
     private final double width;
@@ -20,7 +24,11 @@ class Rectangle implements Quadrangle {
     }
 
     @Override
-    public double[] getDistinctAngles() {
-        return new double[]{90};
+    public ArrayList<Double> getDistinctAngles() {
+        ArrayList<Double> angles = new ArrayList<>();
+        angles.add(90.);
+        return angles;
     }
+
+
 }

@@ -92,5 +92,21 @@ class ShapesTest {
         }
     }
 
+    @Nested
+    class RhombusTest{
+
+        @Test
+        void rhombus_IsPolymorphicType(){
+            Shape rhombus = new Rhombus(42,45);
+            assertThat(rhombus)
+                    .isInstanceOf(Object.class)
+                    .isInstanceOf(Shape.class)
+                    .isInstanceOf(Quadrangle.class)
+                    .isInstanceOf(Rhombus.class);
+
+        }
+
+    }
+
 
 }

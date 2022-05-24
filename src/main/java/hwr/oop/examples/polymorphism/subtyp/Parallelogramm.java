@@ -30,6 +30,6 @@ class Parallelogramm implements Quadrangle{
     public double getAreaSize() {
         double minSide = Math.min(sideA, sideB);
         double maxSide = Math.max(sideA, sideB);
-        return Math.sqrt(Math.pow(maxSide,2)-Math.pow(minSide,2)*minSide);
+        return Math.sqrt(Math.pow(maxSide,2)-Math.pow(minSide,2))*minSide;
     }
 }

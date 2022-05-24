@@ -10,14 +10,14 @@ class Rhombus extends Parallelogramm {
     public Rhombus(double sideA, double angleAlpha) {
         super(sideA, sideA, angleAlpha);
         this.sideA = sideA;
-        this.angleAlpha = angleAlpha;
+        this.angleAlpha = Math.toDegrees(angleAlpha);
     }
 
     @Override
     public ArrayList<Double> getDistinctAngles() {
         ArrayList<Double> angles = new ArrayList<>();
-        angles.add(180-angleAlpha);
-        angles.add(180-angles.get(0));
+        angles.add(180-angleAlpha);     //alpha and gamma
+        angles.add(180-angles.get(0));  //beta and delta
         return angles;
     }
 
@@ -28,6 +28,6 @@ class Rhombus extends Parallelogramm {
 
     @Override
     public double getAreaSize() {
-        return Math.pow(sideA,2)*Math.sin(sideA);
+        return Math.pow(sideA,2)*Math.sin(angleAlpha);
     }
 }

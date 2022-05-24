@@ -1,10 +1,11 @@
 package hwr.oop.examples.polymorphism.subtyp;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ShapesTest {
 
@@ -93,20 +94,162 @@ class ShapesTest {
     }
 
     @Nested
-    class RhombusTest{
+    class RhombusTest {
+
+        private Shape rhombus;
+        @BeforeEach
+        void setUp(){rhombus = new Rhombus(42, 69);}
+
 
         @Test
-        void rhombus_IsPolymorphicType(){
-            Shape rhombus = new Rhombus(42,45);
+        void rhombus_IsPolymorphicType() {
             assertThat(rhombus)
                     .isInstanceOf(Object.class)
                     .isInstanceOf(Shape.class)
                     .isInstanceOf(Quadrangle.class)
+                    .isInstanceOf(Parallelogramm.class)
                     .isInstanceOf(Rhombus.class);
+        }
 
+        @Test
+        void rhombus_GetPerimeterLength_IsFourTimesProvidedSize() {
+            double perimeterLength = rhombus.getPerimeterLength();
+            assertThat(perimeterLength).isEqualTo(42 + 42 + 42 + 42);
+        }
+
+        @Test
+        void rhombus_GetAreaSize_IsSideSquaredTimesSinOfAlpha() {
+            double areaSize = rhombus.getAreaSize();
+            assertThat(areaSize).isEqualTo(42*42*Math.sin(Math.toDegrees(69)));
+        }
+
+        @Test
+        void rhombus_GetNumberOfSides_ReturnsFour() {
+            int numberOfSides = rhombus.getNumberOfSides();
+            assertThat(numberOfSides).isEqualTo(4);
         }
 
     }
 
+    @Nested
+    class ParallelogrammTest {
+
+        private Shape parallelogramm;
+        @BeforeEach
+        void setUp(){parallelogramm = new Parallelogramm(42, 21, 80);        }
+
+        @Test
+        void parallelogramm_IsPolymorphicType() {
+            assertThat(parallelogramm)
+                    .isInstanceOf(Object.class)
+                    .isInstanceOf(Shape.class)
+                    .isInstanceOf(Quadrangle.class)
+                    .isInstanceOf(Parallelogramm.class);
+        }
+
+        @Test
+        void parallelogramm_GetPerimeterLength_BothSidesAddedTimes2() {
+            double perimeterLength = parallelogramm.getPerimeterLength();
+            assertThat(perimeterLength).isEqualTo((42+21)*2);
+        }
+
+        @Test
+        void parallelogramm_GetAreaSize_IsSqrtOfLongerSideSquaredMinusSmallerSideSquaredTimesSmallerSide() {
+            double areaSize = parallelogramm.getAreaSize();
+            assertThat(areaSize).isEqualTo(Math.sqrt(Math.pow(42,2)-Math.pow(21,2))*21);
+        }
+
+        @Test
+        void parallelogramm_GetNumberOfSides_ReturnsFour() {
+            int numberOfSides = parallelogramm.getNumberOfSides();
+            assertThat(numberOfSides).isEqualTo(4);
+        }
+
+    }
+
+    @Nested
+    class TrapezTest {
+
+
+        private Shape trapez;
+        @BeforeEach
+        void setUp(){
+            try {
+                trapez = new Trapez(10.1,4.5,5,5);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Test
+        void trapez_IsPolymorphicType() {
+            assertThat(trapez)
+                    .isInstanceOf(Object.class)
+                    .isInstanceOf(Shape.class)
+                    .isInstanceOf(Quadrangle.class)
+                    .isInstanceOf(Trapez.class);
+        }
+
+        @Test
+        void trapez_GetPerimeterLength_BothSidesAddedTimes2() {
+            double perimeterLength = trapez.getPerimeterLength();
+            assertThat(perimeterLength).isEqualTo((42+21)*2);
+        }
+
+        @Test
+        void trapez_GetAreaSize_IsSideAPlusSideCDividedBy2TimesHeight() {
+            double areaSize = trapez.getAreaSize();
+            assertThat(areaSize).isEqualTo(((10.1+5)/2)*3.988);
+        }
+
+        @Test
+        void trapez_GetNumberOfSides_ReturnsFour() {
+            int numberOfSides = trapez.getNumberOfSides();
+            assertThat(numberOfSides).isEqualTo(4);
+        }
+
+        @Test
+        void trapez_checkIfProvidedValuesIsATrapezoid(){
+            System.out.println(trapez.getAreaSize());
+            assertThrows(Exception.class, () -> new Trapez(10.1,4.5,5,5));
+
+        }
+    }
+
+    @Nested
+    class IsoscelesTriangleTest {
+
+        private Shape gleichschenkligesDreieck;
+        @BeforeEach
+        void setUp(){gleichschenkligesDreieck = new IsoscelesTriangle(34.4,30);
+        }
+
+        @Test
+        void isoscelesTriangle_IsPolymorphicType() {
+            assertThat(gleichschenkligesDreieck)
+                    .isInstanceOf(Object.class)
+                    .isInstanceOf(Shape.class)
+                    .isInstanceOf(Dreieck.class)
+                    .isInstanceOf(IsoscelesTriangle.class);
+        }
+
+        @Test
+        void isoscelesTriangle_GetPerimeterLength_IsOneSideTimesTwoPlusTheOtherSide() {
+            double perimeterLength = gleichschenkligesDreieck.getPerimeterLength();
+            assertThat(perimeterLength).isEqualTo(34.4*2+30);
+        }
+
+        @Test
+        void isoscelesTriangle_GetAreaSize_IsSideBTimesHeightTimesAHalf() {
+            double areaSize = gleichschenkligesDreieck.getAreaSize();
+            assertThat(areaSize).isEqualTo((0.5*30)*0.5 * Math.sqrt(4* Math.pow(34.4-30,2)));
+        }
+
+        @Test
+        void isoscelesTriangle_GetNumberOfSides_ReturnsThree() {
+            int numberOfSides = gleichschenkligesDreieck.getNumberOfSides();
+            assertThat(numberOfSides).isEqualTo(3);
+        }
+    }
 
 }

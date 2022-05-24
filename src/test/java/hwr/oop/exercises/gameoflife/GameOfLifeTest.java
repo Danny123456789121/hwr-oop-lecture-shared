@@ -99,4 +99,30 @@ class GameOfLifeTest {
         assertThat(new Cell[]{cell_5_4, cell_5_6}).allMatch(Cell::isDead);
     }
 
+    @Test
+    void blinkerNeighbours(){
+        Field field = new Field(10);
+        Game game = new Game(field);
+
+        Cell cell_4_5 = field.getCellAt(new Position(4, 5));
+        Cell cell_5_5 = field.getCellAt(new Position(5, 5));
+        Cell cell_6_5 = field.getCellAt(new Position(6, 5));
+
+        cell_4_5.markAlive();
+        cell_5_5.markAlive();
+        cell_6_5.markAlive();
+        //System.out.println(cell_5_5.getNeighbours());
+
+        int lengthN = cell_5_5.getNeighbours().length;
+        boolean Nlength = lengthN == 2;
+
+        assertThat(new Cell[]{cell_4_5, cell_5_5, cell_6_5}).allMatch(Cell::isAlive);
+        game.proceed();
+        assertThat(new Cell[]{cell_4_5, cell_6_5}).allMatch(Cell::isDead);
+        assertThat(new Cell[]{cell_5_5}).allMatch(Cell::isAlive);
+
+
+
+    }
+
 }

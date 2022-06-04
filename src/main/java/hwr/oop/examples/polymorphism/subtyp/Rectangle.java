@@ -1,10 +1,9 @@
 package hwr.oop.examples.polymorphism.subtyp;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 class Rectangle implements Quadrangle {
+
     private final double height;
     private final double width;
 
@@ -30,5 +29,16 @@ class Rectangle implements Quadrangle {
         return angles;
     }
 
+    public double getHeight() {
+        return height;
+    }
 
+    public double getWidth() {
+        return width;
+    }
+
+    @Override
+    public int compareTo(Quadrangle o) {
+        return Quadrangle.super.compareTo(o);
+    }
 }

@@ -2,9 +2,10 @@ package hwr.oop.examples.polymorphism.subtyp;
 
 import java.util.ArrayList;
 
-public class IsoscelesTriangle implements Dreieck {
+public class IsoscelesTriangle implements Triangle {
 
-    private double sideA, sideB;
+    private final double sideA;
+    private final double sideB;
 
     public IsoscelesTriangle(double sideA, double sideB) {
         this.sideA = sideA;

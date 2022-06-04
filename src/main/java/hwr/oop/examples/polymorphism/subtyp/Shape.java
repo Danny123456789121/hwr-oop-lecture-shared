@@ -6,4 +6,5 @@ public interface Shape {
     double getAreaSize();
 
     int getNumberOfSides();
+
 }

@@ -2,7 +2,7 @@ package hwr.oop.examples.polymorphism.subtyp;
 
 import java.util.ArrayList;
 
-public interface Dreieck extends Shape, Comparable<Dreieck>{
+public interface Triangle extends Shape, Comparable<Triangle>{
 
     @Override
     default int getNumberOfSides() {return 3;}
@@ -10,7 +10,7 @@ public interface Dreieck extends Shape, Comparable<Dreieck>{
     ArrayList<Double> getDistinctAngles();
 
     @Override
-    default int compareTo(Dreieck o) {
+    default int compareTo(Triangle o) {
         return Double.compare(getAreaSize(), o.getAreaSize());
     }
 }
